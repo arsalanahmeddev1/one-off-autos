@@ -82,16 +82,11 @@ const Blogs = () => {
                 <h1 className="text-3xl font-bold mb-8">Latest Blogs</h1>
 
                 {/* LOADING */}
-                {loading && <p>Loading blogs...</p>}
+                {loading && <div className="flex justify-center items-center absolute inset-0 z-1"><div className="loader"></div></div>}
 
                 {/* EMPTY STATE */}
                 {!loading && blogs.length === 0 && (
-                    <div className="flex justify-center items-center py-16">
-                        <div className="text-center">
-                            <p className="text-xl text-gray-600 font-semibold">No blog found</p>
-                            <p className="text-gray-500 mt-2">There are no blogs available at the moment.</p>
-                        </div>
-                    </div>
+                    <div className="flex justify-center items-center absolute inset-0 z-1"><div className="loader"></div></div>
                 )}
 
                 {/* BLOG LIST */}
