@@ -68,7 +68,7 @@ const Blogs = () => {
                         {/* META */}
                         <div className="flex items-center text-gray-600 mb-6">
                             <Calendar size={18} className="mr-2" />
-                            {new Date(data.created_at).toLocaleDateString()}
+                            {(data.schedule_date)}
                         </div>
 
                         {/* IMAGE */}
