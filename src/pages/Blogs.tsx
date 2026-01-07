@@ -14,6 +14,7 @@ interface Blog {
     author: string;
     category: string;
     slug: string;
+    schedule: string;
 }
 
 const Blogs = () => {
@@ -34,6 +35,7 @@ const Blogs = () => {
                 excerpt: item.description ?? '',
                 image: item.image_url,
                 date: item.created_at,
+                schedule: item.schedule_date,
                 author: item.category?.title || "Admin",
                 category: item.category?.title || "General",
                 slug: item.slug,
@@ -93,43 +95,43 @@ const Blogs = () => {
                 {!loading && blogs.length > 0 && (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                         {paginatedBlogs.map((blog) => (
-                        <Link key={blog.id} to={`/${blog.slug}`} className="block">
-                            <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg h-full transition-shadow">
-                                <div className="relative pb-[65%] overflow-hidden">
-                                    <img
-                                        src={blog.image}
-                                        alt={blog.title}
-                                        className="absolute inset-0 w-full h-full object-cover"
-                                        width="286"
-                                        height="185"
-                                        loading="lazy"
-                                    />
-                                    <div className="absolute top-0 right-0 bg-oneoffautos-red text-white px-3 py-1 m-3 rounded-md font-semibold">
-                                        <span>{blog.category}</span>
+                            <Link key={blog.id} to={`/${blog.slug}`} className="block">
+                                <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg h-full transition-shadow">
+                                    <div className="relative pb-[65%] overflow-hidden">
+                                        <img
+                                            src={blog.image}
+                                            alt={blog.title}
+                                            className="absolute inset-0 w-full h-full object-cover"
+                                            width="286"
+                                            height="185"
+                                            loading="lazy"
+                                        />
+                                        <div className="absolute top-0 right-0 bg-oneoffautos-red text-white px-3 py-1 m-3 rounded-md font-semibold">
+                                            <span>{blog.category}</span>
+                                        </div>
+                                    </div>
+
+                                    <div className="p-4">
+                                        <h3 className="font-bold text-lg mb-2 line-clamp-2">
+                                            {blog.title}
+                                        </h3>
+
+                                        <p className="text-gray-600 text-sm mb-3 line-clamp-3">
+                                            <div dangerouslySetInnerHTML={{ __html: blog.excerpt }} />
+                                        </p>
+
+                                        <div className="flex items-center text-gray-600 text-sm">
+                                            <Calendar size={16} className="mr-1" />
+                                            <span className="mr-4">
+                                                {(blog.schedule)}
+                                            </span>
+
+                                            <User size={16} className="mr-1" />
+                                            <span>{blog.author}</span>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <div className="p-4">
-                                    <h3 className="font-bold text-lg mb-2 line-clamp-2">
-                                        {blog.title}
-                                    </h3>
-
-                                    <p className="text-gray-600 text-sm mb-3 line-clamp-3">
-                                        <div dangerouslySetInnerHTML={{ __html: blog.excerpt }} />
-                                    </p>
-
-                                    <div className="flex items-center text-gray-600 text-sm">
-                                        <Calendar size={16} className="mr-1" />
-                                        <span className="mr-4">
-                                            {new Date(blog.date).toLocaleDateString()}
-                                        </span>
-
-                                        <User size={16} className="mr-1" />
-                                        <span>{blog.author}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
+                            </Link>
                         ))}
                     </div>
                 )}
